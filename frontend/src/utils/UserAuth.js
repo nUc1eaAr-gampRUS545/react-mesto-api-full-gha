@@ -1,4 +1,4 @@
-const baseURL='https://auth.nomoreparties.co';
+const baseURL='http://localhost:5000';
 
 
 const checkResponse=(res)=> {
@@ -12,6 +12,7 @@ return(
     fetch(`${baseURL}/signup`,{
         method:"POST",
         headers:{'Content-Type': 'application/json'},
+        credentials:"include",
         body: JSON.stringify(data)
         }).then(checkResponse))
 
@@ -22,19 +23,20 @@ export const authorization=(data)=>{
         fetch(`${baseURL}/signin`,{
             method:"POST",
             headers:{'Content-Type': 'application/json'},
+            credentials:"include",
             body: JSON.stringify(data)
             }).then(checkResponse).then((data) => {
                 if (data.token) {
                   const token = data.token;
-                  localStorage.setItem('jwt', token);
                   return token;
                 };
               }))
     }
-export const getContent=(token)=>{
+export const getContent=()=>{
     return(fetch(`${baseURL}/users/me`,{
         method:"GET",
-        headers:{'Content-Type': 'application/json',"Authorization" : `Bearer ${token}`}
+        headers:{'Content-Type': 'application/json',},
+        credentials:"include"
         
         }).then(checkResponse))
 

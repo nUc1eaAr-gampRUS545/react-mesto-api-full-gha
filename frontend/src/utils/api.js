@@ -16,7 +16,8 @@
   getInitialCards() {
     return fetch(`${this.#userUrl}/cards`, {
       method:"GET",
-      headers: this.#headers})
+      headers: this.#headers,
+      credentials:"include",},)
       .then(this._checkResponse)
       
   }
@@ -24,6 +25,7 @@
     return fetch(`${this.#userUrl}/cards`, {
         method:"POST",
         headers:this.#headers,
+        credentials:"include",
         body: JSON.stringify(data)
         })
         .then(this._checkResponse)
@@ -32,6 +34,7 @@
     return fetch(`${this.#userUrl}/users/me`, {
         method:"PATCH",
         headers:this.#headers,
+        credentials:"include",
         body: JSON.stringify(data)
         })
         .then(this._checkResponse)
@@ -40,13 +43,15 @@
   getInfo(){
     return fetch(`${this.#userUrl}/users/me`, {
       method:"GET",
-      headers: this.#headers})
+      headers: this.#headers,
+      credentials:"include",})
       .then(this._checkResponse)
   }
   setLikes(data,isLiked){  
   return fetch(`${this.#userUrl}/cards/${data}/likes`, {
     method: (isLiked ? 'DELETE' : 'PUT'),
-    headers:this.#headers})
+    headers:this.#headers,
+    credentials:"include",})
     .then(this._checkResponse)
   }
 
@@ -54,6 +59,7 @@ changeProfile(data){
   return fetch(`${this.#userUrl}/users/me/avatar`, {
     method:"PATCH",
     headers: this.#headers,
+    credentials:"include",
     body: JSON.stringify(data)})
       .then(this._checkResponse)
 }  
@@ -61,11 +67,12 @@ changeProfile(data){
 deleteCard(data){
   return fetch(`${this.#userUrl}/cards/${data}`, {
     method:"DELETE",
-    headers: this.#headers})
+    headers: this.#headers,
+    credentials:"include",})
     .then(this._checkResponse)
 }
 }
- const api = new Api({baseURL:`https://mesto.nomoreparties.co/v1/cohort-65`,headers:{
-  authorization: "6af0fad8-3b2e-4d49-af39-c98a3c186d35",
+ const api = new Api({baseURL:`http://localhost:5000`,
+ headers:{
   'Content-Type': 'application/json'}});
   export default api;

@@ -96,11 +96,7 @@ function getUserInfo(req, res, next) {
   userSchema.findById(req.user.payload)
     .orFail(new NotFoundError('Пользователь не найден'))
     .then((user) => {
-      res.status(200).send(
-        {
-          email: user.email, name: user.name, about: user.about, avatar: user.avatar,
-        },
-      );
+      res.status(200).send(user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {

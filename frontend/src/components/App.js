@@ -34,16 +34,14 @@ function App() {
     localStorage.removeItem("jwt");
   }
   const checkToken = () => {
-    const jwt = localStorage.getItem("jwt");
-    
-    getContent(jwt)
+    getContent()
       .then((data) => {
         if (!data) {
           return;
         }
         navigate("/");
         setLoggedIn(true);
-        handleUserDataChange(data.data)
+        handleUserDataChange(data)
       })
       .catch((data) => {
         handleUserDataChange('')
@@ -54,6 +52,7 @@ function App() {
 
   React.useEffect(() => {
     checkToken();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleLogged = () => {
@@ -65,10 +64,11 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [isLoggetIn, setLoggedIn] = React.useState(null);
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some( (like) => like === currentUser._id );
     api
       .setLikes(card._id, isLiked)
       .then((newCard) => {
+        
         setCards((state) =>
           state.map((item) => (item._id === card._id ? newCard : item))
         );

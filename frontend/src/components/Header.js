@@ -1,5 +1,4 @@
 function Header({element,flag,userData}) {
-  
   return (
     <header className="header">
       <div className="header__logo"></div>
