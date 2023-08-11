@@ -32,7 +32,11 @@ app.get('/signout', (req, res) => {
 });
 app.use('/users', authentiacateUser, routesUsers);
 app.use('/cards', authentiacateUser, routesCards);
-
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 app.use(authentiacateUser, (_req, _res, next) => next(new NotFoundError('Cтраница не найдена')));
 app.use(errors());
 app.use(errorHandler);
