@@ -63,12 +63,28 @@ function App() {
 
   const [cards, setCards] = React.useState([]);
   const [isLoggetIn, setLoggedIn] = React.useState(null);
+  const [currentUser, setCurrentUser] = React.useState({
+    _id: '',
+    email: '',
+    name: '',
+    about: '',
+    avatar: ''
+  });
+  React.useEffect(() => {
+    api
+      .getInfo()
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
   function handleCardLike(card) {
-    const isLiked = card.likes.some( (like) => like === currentUser._id );
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     api
       .setLikes(card._id, isLiked)
       .then((newCard) => {
-        
         setCards((state) =>
           state.map((item) => (item._id === card._id ? newCard : item))
         );
@@ -98,17 +114,7 @@ function App() {
         console.error(err);
       });
   }, []);
-  const [currentUser, setCurrentUser] = React.useState({});
-  React.useEffect(() => {
-    api
-      .getInfo()
-      .then((data) => {
-        setCurrentUser(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+ 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
   const [isEditInfoTooltipPopupOpen, setIsEditInfoTooltipPopupOpen] =

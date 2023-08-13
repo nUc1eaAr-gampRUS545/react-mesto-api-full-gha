@@ -20,7 +20,8 @@ const { errorHandler } = require('./utils/errors/errorHandler');
 
 app.use(bodyParser.json());
 app.use(cookies());
-app.use(cors({ origin: 'https://mesto-react-app.nomoreparties.co', credentials: true }));
+// app.use(cors({ origin: 'https://mesto-react-app.nomoreparties.co', credentials: true }));
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(express.json());
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb', { useNewUrlParser: true, useUnifiedTopology: false });

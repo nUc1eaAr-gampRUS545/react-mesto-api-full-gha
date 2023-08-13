@@ -118,7 +118,7 @@ function updateUser(req, res, next) {
       if (!data) {
         next(new NotFoundError('Пользователь по указанному id не найден.'));
       } else {
-        res.status(200).send({ data });
+        res.status(200).send(data);
       }
     })
     .catch((data) => {
@@ -140,7 +140,7 @@ function updateAvatar(req, res, next) {
       if (!data) {
         next(new NotFoundError('Пользователь по указанному id не найден.'));
       } else {
-        res.status(200).send({ data });
+        res.status(200).send(data);
       }
     })
     .catch((data) => {

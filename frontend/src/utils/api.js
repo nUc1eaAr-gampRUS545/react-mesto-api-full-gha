@@ -72,7 +72,7 @@ deleteCard(data){
     .then(this._checkResponse)
 }
 }
- const api = new Api({baseURL:`https://api-mesto-react-app.nomoreparties.co`,
+ const api = new Api({baseURL:`http://localhost:5000`,
  headers:{
   'Content-Type': 'application/json'}});
   export default api;

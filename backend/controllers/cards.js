@@ -19,7 +19,7 @@ function getCard(req, res, next) {
       if (!data) {
         next(new NotFoundError('Такого пользователя не сущесвует'));
       } else {
-        res.status(200).send({ message: data });
+        res.status(200).send(data);
       }
     })
     .catch((err) => {
@@ -66,7 +66,7 @@ function likeCard(req, res, next) {
       if (!data) {
         return next(new NotFoundError('Такой карточки не сущесвует'));
       }
-      return res.status(200).send({ message: data });
+      return res.status(200).send(data);
     })
     .catch((err) => {
       if (err.kind === 'ObjectId') {
@@ -89,7 +89,7 @@ function dislikeCard(req, res, next) {
       if (!data) {
         res.status(404).send({ message: 'Такой карточки не существует' });
       } else {
-        res.status(200).send({ message: data });
+        res.status(200).send(data);
       }
     })
     .catch((err) => {

@@ -37,9 +37,9 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick,cards,onCar
         </button>
       </section>
       <ul className="elements">
-        {cards.map((card) => (
-          <Card card={card} key={card._id} onCardClick={onCardClick} onCardLike={onCardLike} onDeleteCard={onDeleteCard}/>
-        ))}
+        {cards.map((data) => 
+          <Card card={data} key={data._id} onCardClick={onCardClick} onCardLike={onCardLike} onDeleteCard={onDeleteCard}/>
+        )}
       </ul>
     </main>
   );
