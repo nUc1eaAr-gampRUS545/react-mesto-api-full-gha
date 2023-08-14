@@ -1,4 +1,4 @@
-const baseURL='http://localhost:5000';
+const baseURL='https://api-mesto-react-app.nomoreparties.co';
 
 
 const checkResponse=(res)=> {
