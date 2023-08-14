@@ -12,6 +12,7 @@ export default function Registr({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
   const handleChange = (evt) => {
     const { name, value } = evt.target;
     setFormValue({ ...formValue, [name]: value });
@@ -21,6 +22,7 @@ export default function Registr({
     registr(formValue)
       .then((data) => {
         handleOKMassege();
+        navigate("/sign-in");
       })
       .catch((err) => {
         handleErrorMassege();

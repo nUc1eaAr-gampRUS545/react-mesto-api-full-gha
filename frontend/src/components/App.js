@@ -31,7 +31,9 @@ function App() {
   }
   
   function signOut() {
-    localStorage.removeItem("jwt");
+    api.signOut().then((data)=>{
+      console.log("удалили куку =)")
+    })
   }
   const checkToken = () => {
     getContent()

@@ -1,10 +1,10 @@
-/* eslint-disable no-shadow */
-/* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 const NotFoundError = require('../utils/errors/not-found-error');
-// const Unauthorized = require('../utils/errors/unauthorized');
+
 const userSchema = require('../models/users');
 const ErrorBadRequest = require('../utils/errors/invalid-request');
 const IntervalServerError = require('../utils/errors/IntervalServerError');
@@ -64,7 +64,6 @@ function createUser(req, res, next) {
       }
     });
 }
-
 function login(req, res, next) {
   const { email, password } = req.body;
   userSchema.findOne({ email }).select('+password')
@@ -77,7 +76,10 @@ function login(req, res, next) {
           if (!result) {
             return next(new Unauthorized('Неправильные почта или пароль'));
           }
-          const token = jwt.sign({ payload: user._id }, 'some-secret-key', { expiresIn: '7d' });
+          const token = jwt.sign(
+            { payload: user._id },
+            NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+          );
           res
             .cookie('jwt', token, {
               maxage: 3600000 * 24 * 7,

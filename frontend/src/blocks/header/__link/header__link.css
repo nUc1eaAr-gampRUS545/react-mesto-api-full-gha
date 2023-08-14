@@ -5,7 +5,6 @@ font-weight: 400;
 font-size: 18px;
 line-height: 22px;
 margin-left: 20px;
-margin-right: 20px;
 text-decoration: none;
 color: white;
 text-align: right;
@@ -14,3 +13,9 @@ transition: opacity 0.15s linear;
 .header__link:hover{
     opacity: 0.8;
 }
+@media screen  and (max-width:881px){
+    .header__link{
+      margin-right: 20px;
+    }
+
+  }

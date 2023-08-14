@@ -71,6 +71,13 @@ deleteCard(data){
     credentials:"include",})
     .then(this._checkResponse)
 }
+signOut(){
+  return fetch(`${this.#userUrl}/signout`,{
+    method:"GET",
+    headers: this.#headers,
+    credentials:"include",},)
+    .then(this._checkResponse)
+}
 }
  const api = new Api({baseURL:`https://api-mesto-react-app.nomoreparties.co`,
  headers:{

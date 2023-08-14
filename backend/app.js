@@ -1,12 +1,13 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const express = require('express');
-
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookies = require('cookie-parser');
 const { errors } = require('celebrate');
 const cors = require('cors');
+require('dotenv').config();
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, DB_LINK } = process.env;
 const app = express();
 // eslint-disable-next-line import/newline-after-import
 const routesCards = require('./routes/cards');
@@ -23,7 +24,7 @@ app.use(cookies());
 app.use(cors({ origin: 'https://mesto-react-app.nomoreparties.co', credentials: true }));
 app.use(express.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/mestodb', { useNewUrlParser: true, useUnifiedTopology: false });
+mongoose.connect(DB_LINK, { useNewUrlParser: true, useUnifiedTopology: false });
 
 app.post('/signup', validateCreateUser, createUser);
 app.post('/signin', validateUserLogin, login);

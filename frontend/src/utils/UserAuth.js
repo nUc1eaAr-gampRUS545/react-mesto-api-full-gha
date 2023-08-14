@@ -1,6 +1,5 @@
 const baseURL='https://api-mesto-react-app.nomoreparties.co';
 
-
 const checkResponse=(res)=> {
         if (res.ok) {
           return res.json();
