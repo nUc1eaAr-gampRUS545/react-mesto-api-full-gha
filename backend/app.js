@@ -41,6 +41,4 @@ app.get('/crash-test', () => {
 app.use(authentiacateUser, (_req, _res, next) => next(new NotFoundError('Cтраница не найдена')));
 app.use(errors());
 app.use(errorHandler);
-app.listen(PORT, () => {
-  console.log('Сервер запущен');
-});
+app.listen(PORT);
