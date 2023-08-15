@@ -53,8 +53,16 @@ function App() {
   };
 
   React.useEffect(() => {
-    checkToken();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    checkToken().then(()=>{
+      api
+      .getInfo()
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    })
   }, []);
 
   const handleLogged = () => {
