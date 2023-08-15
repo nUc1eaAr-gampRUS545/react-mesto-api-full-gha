@@ -1,11 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookies = require('cookie-parser');
 const { errors } = require('celebrate');
 const cors = require('cors');
-require('dotenv').config();
 
 const { PORT = 5000 } = process.env;
 const app = express();
