@@ -15,7 +15,8 @@ transition: opacity 0.15s linear;
 }
 @media screen  and (max-width:881px){
     .header__link{
-      margin-right: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
     }
 
   }
