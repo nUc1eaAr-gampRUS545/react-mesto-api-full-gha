@@ -24,8 +24,13 @@ app.use(cookies());
 app.use(cors({ origin: 'https://mesto-react-app.nomoreparties.co', credentials: true }));
 app.use(express.json());
 
-mongoose.connect(DB_LINK, { useNewUrlParser: true, useUnifiedTopology: false });
+mongoose.connect('mongodb://127.0.0.1:27017/mestodb', { useNewUrlParser: true, useUnifiedTopology: false });
 
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 app.post('/signup', validateCreateUser, createUser);
 app.post('/signin', validateUserLogin, login);
 app.get('/signout', (req, res) => {
@@ -33,11 +38,7 @@ app.get('/signout', (req, res) => {
 });
 app.use('/users', authentiacateUser, routesUsers);
 app.use('/cards', authentiacateUser, routesCards);
-app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
-});
+
 app.use(authentiacateUser, (_req, _res, next) => next(new NotFoundError('Cтраница не найдена')));
 app.use(errors());
 app.use(errorHandler);
