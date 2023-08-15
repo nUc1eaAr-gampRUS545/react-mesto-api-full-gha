@@ -43,7 +43,15 @@ function App() {
         }
         navigate("/");
         setLoggedIn(true);
-        handleUserDataChange(data)
+        handleUserDataChange(data);
+        api
+      .getInfo()
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
       })
       .catch((data) => {
         handleUserDataChange('')
@@ -53,16 +61,7 @@ function App() {
   };
 
   React.useEffect(() => {
-    checkToken().then(()=>{
-      api
-      .getInfo()
-      .then((data) => {
-        setCurrentUser(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-    }).catch((err)=>(console.log(err)))
+    checkToken();
   }, []);
 
   const handleLogged = () => {
