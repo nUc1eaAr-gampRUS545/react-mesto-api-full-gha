@@ -7,7 +7,7 @@ const { errors } = require('celebrate');
 const cors = require('cors');
 require('dotenv').config();
 
-const { PORT = 3000, DB_LINK } = process.env;
+const { PORT = 3000 } = process.env;
 const app = express();
 // eslint-disable-next-line import/newline-after-import
 const routesCards = require('./routes/cards');
