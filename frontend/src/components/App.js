@@ -18,6 +18,7 @@ import { NavLink } from "react-router-dom";
 import InfoTooltip from "./InfoTooltip.js";
 
 function App() {
+  const [isLoggetIn, setLoggedIn] = React.useState(null);
   const navigate = useNavigate();
   function handleUserDataChange(data){
     setUserData(data)
@@ -44,14 +45,7 @@ function App() {
         navigate("/");
         setLoggedIn(true);
         handleUserDataChange(data);
-        api
-      .getInfo()
-      .then((data) => {
-        setCurrentUser(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  
       })
       .catch((data) => {
         handleUserDataChange('')
@@ -67,11 +61,23 @@ function App() {
   const handleLogged = () => {
     setLoggedIn(true);
   };
+ 
+    React.useEffect(() => {
+      api
+        .getInitialCards()
+        .then((data) => {
+          setCards(data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }, [isLoggetIn]);
+  
   const [errorMassege, setErrorMassege] = React.useState(null);
   const [isUserData, setUserData] = React.useState({});
 
   const [cards, setCards] = React.useState([]);
-  const [isLoggetIn, setLoggedIn] = React.useState(null);
+  
   const [currentUser, setCurrentUser] = React.useState({
     _id: '',
     email: '',
@@ -79,7 +85,7 @@ function App() {
     about: '',
     avatar: ''
   });
-  /*React.useEffect(() => {
+  React.useEffect(() => {
     api
       .getInfo()
       .then((data) => {
@@ -88,7 +94,7 @@ function App() {
       .catch((err) => {
         console.error(err);
       });
-  }, []);*/
+  }, [isLoggetIn]);
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i === currentUser._id);
     api
@@ -113,16 +119,7 @@ function App() {
       });
   };
 
-  React.useEffect(() => {
-    api
-      .getInitialCards()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+  
  
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
