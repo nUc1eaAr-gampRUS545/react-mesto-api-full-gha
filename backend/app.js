@@ -7,7 +7,7 @@ const cookies = require('cookie-parser');
 const { errors } = require('celebrate');
 const cors = require('cors');
 
-const { PORT = 5000 } = process.env;
+const { PORT = 3000 } = process.env;
 const app = express();
 // eslint-disable-next-line import/newline-after-import
 const routesCards = require('./routes/cards');
