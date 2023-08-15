@@ -79,7 +79,7 @@ function App() {
     about: '',
     avatar: ''
   });
-  React.useEffect(() => {
+  /*React.useEffect(() => {
     api
       .getInfo()
       .then((data) => {
@@ -88,7 +88,7 @@ function App() {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, []);*/
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i === currentUser._id);
     api
